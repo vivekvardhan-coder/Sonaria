@@ -1,0 +1,606 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+  --main-color: #ffffff;
+  --bg-color: #121212;
+  --neon-glow: #0ff;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-color);
+  color: var(--main-color);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  transition: background 0.5s ease;
+  overflow-x: hidden;
+}
+
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(50px);
+  position: sticky;
+  top: 10;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.app-title {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 600;
+  background: linear-gradient(to right, var(--main-color), var(--accent-color, #bb86fc));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  letter-spacing: 1px;
+  position: absolute;
+  left: 10%;
+  transform: translateX(-50%);
+}
+
+/* Theme-specific title styling */
+body.light .app-title {
+  background: linear-gradient(to right, #000, #4a90e2);
+  background-clip: text;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+body.dark .app-title {
+  background: linear-gradient(to right, #fff, #bb86fc);
+  background-clip: text;
+}
+
+body.neon .app-title {
+  background: linear-gradient(to right, #0ff, #f0f);
+  background-clip: text;
+  text-shadow: 0 0 15px #0ff;
+}
+
+body.party .app-title {
+  background: linear-gradient(to right, #f0f, #ff0);
+  background-clip: text;
+  animation: partyLogo 3s infinite alternate;
+}
+
+@keyframes partyLogo {
+  0% { text-shadow: 0 0 10px #f0f; }
+  50% { text-shadow: 0 0 15px #0ff; }
+  100% { text-shadow: 0 0 20px #ff0; }
+}
+
+.theme-container {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: calc(100vh - 70px);
+  padding: 2rem 0;
+  overflow-y: auto;
+}
+
+.theme-container button {
+  padding: 0.5rem 1rem;
+  margin: 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.theme-container button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px var(--accent-color);
+}
+
+body.light .theme-container button:hover {
+  background: rgba(74, 144, 226, 0.2);
+}
+
+body.dark .theme-container button:hover {
+  background: rgba(187, 134, 252, 0.2);
+}
+
+body.neon .theme-container button:hover {
+  background: rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 20px var(--main-color);
+}
+
+body.party .theme-container button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: partyButton 2s infinite alternate;
+}
+
+/* Music container styles */
+.music-container {
+  width: 90%;
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.upload-section {
+  border: 2px dashed #aaa;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 15px;
+}
+
+.upload-btn, .lyrics-btn {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  margin: 10px 0;
+  border-radius: 12px;
+  border: 1px solid #fff;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+}
+
+.controls {
+  margin: 15px 0;
+}
+
+.controls button {
+  font-size: 20px;
+  padding: 10px;
+  margin: 0 10px;
+  background: none;
+  border: none;
+  color: var(--main-color);
+  cursor: pointer;
+}
+
+#playlist {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+#playlist li {
+  padding: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#playlist li:hover, #playlist li.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+#visualizer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  height: 60px;
+  align-items: end;
+}
+
+.bar {
+  width: 10px;
+  height: 20px;
+  margin: 0 3px;
+  background: lime;
+  animation: bounce 1.5s infinite ease-in-out;
+  animation-delay: calc(var(--i) * 0.1s);
+}
+
+@keyframes bounce {
+  0%, 100% { height: 20px; }
+  50% { height: 60px; }
+}
+
+.lyrics-container {
+  margin-top: 20px;
+}
+
+#lyrics-box {
+  max-height: 150px;
+  overflow-y: auto;
+  text-align: left;
+  background: rgba(255,255,255,0.05);
+  padding: 10px;
+  border-radius: 12px;
+}
+
+/* Adjust notes to avoid floating behind content */
+#floating-notes {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+  /* Remove clip-path - we're handling positioning in JS now */
+}
+
+.note {
+  position: fixed;
+  font-size: 35px;
+  color: #ff00ff;
+  animation: waveFloat 10s linear infinite;
+  opacity: 1;
+  pointer-events: none;
+  text-shadow: 0 0 30px currentColor, 0 0 50px currentColor;
+  z-index: 5;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Additional classes for variety that will be added via JS */
+.note.large {
+  font-size: 45px;
+  font-weight: bold;
+}
+
+.note.medium {
+  font-size: 35px;
+}
+
+.note.small {
+  font-size: 25px;
+  opacity: 0.9;
+}
+
+.note.bright {
+  text-shadow: 0 0 40px currentColor, 0 0 70px currentColor, 0 0 100px currentColor;
+}
+
+@keyframes waveFloat {
+  0% {
+    bottom: -50px;
+    opacity: 1;
+    transform: translateX(0) rotate(0deg) translateZ(0);
+  }
+  25% {
+    transform: translateX(40px) rotate(20deg) translateZ(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(0) rotate(180deg) translateZ(0);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateX(-40px) rotate(270deg) translateZ(0);
+    opacity: 0.7;
+  }
+  90% {
+    bottom: 95vh;
+    opacity: 0.3;
+    transform: translateX(0) rotate(345deg) translateZ(0);
+  }
+  100% {
+    bottom: 110vh;
+    opacity: 0;
+    transform: translateX(0) rotate(360deg) translateZ(0);
+  }
+}
+
+body.party .note {
+  color: #00ffff;
+  animation: partyWaveFloat 7s linear infinite;
+  text-shadow: 0 0 40px currentColor, 0 0 60px currentColor;
+}
+
+@keyframes partyWaveFloat {
+  0% {
+    bottom: -50px;
+    opacity: 1;
+    transform: translateX(0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateX(60px) rotate(90deg) scale(1.2);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(0) rotate(180deg) scale(1.5);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateX(-60px) rotate(270deg) scale(1.2);
+    opacity: 0.7;
+  }
+  90% {
+    bottom: 95vh;
+    opacity: 0.3;
+    transform: translateX(0) rotate(345deg) scale(1.1);
+  }
+  100% {
+    bottom: 110vh;
+    opacity: 0;
+    transform: translateX(0) rotate(360deg) scale(1);
+  }
+}
+
+body.light {
+  --bg-color: #f8f8f8;
+  --main-color: #000;
+  --accent-color: #4a90e2;
+  background: linear-gradient(135deg, #f8f8f8 0%, #e0e0e0 100%);
+}
+body.dark {
+  --bg-color: #121212;
+  --main-color: #fff;
+  --accent-color: #bb86fc;
+  background: linear-gradient(135deg, #121212 0%, #1f1f1f 100%);
+}
+body.neon {
+  --bg-color: #000;
+  --main-color: #0ff;
+  --accent-color: #ff00ff;
+  background: #000;
+  text-shadow: 0 0 10px var(--main-color);
+}
+body.party {
+  --bg-color: #111;
+  --main-color: #fff;
+  --accent-color: #ff00ff;
+  background: #111;
+  animation: partyBackground 10s infinite linear;
+}
+
+@keyframes partyBackground {
+  0% { background: #111; }
+  25% { background: #1a0033; }
+  50% { background: #330066; }
+  75% { background: #1a0033; }
+  100% { background: #111; }
+}
+
+body.party .music-container {
+  background: rgba(17, 17, 17, 0.8);
+  box-shadow: 0 0 30px var(--accent-color),
+              0 0 60px rgba(255, 0, 255, 0.3),
+              0 0 90px rgba(0, 255, 255, 0.2);
+  animation: partyContainer 4s infinite alternate;
+}
+
+@keyframes partyContainer {
+  0% { box-shadow: 0 0 30px var(--accent-color),
+                  0 0 60px rgba(255, 0, 255, 0.3),
+                  0 0 90px rgba(0, 255, 255, 0.2); }
+  100% { box-shadow: 0 0 40px var(--accent-color),
+                    0 0 80px rgba(255, 0, 255, 0.4),
+                    0 0 120px rgba(0, 255, 255, 0.3); }
+}
+
+@keyframes partyButton {
+  0% { box-shadow: 0 0 10px var(--accent-color); }
+  100% { box-shadow: 0 0 20px var(--accent-color),
+                     0 0 30px rgba(255, 0, 255, 0.5); }
+}
+
+#party-lights {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: 
+    radial-gradient(circle at var(--x1, 50%) var(--y1, 50%), rgba(255,0,255,0.4), transparent 40%),
+    radial-gradient(circle at var(--x2, 50%) var(--y2, 50%), rgba(0,255,255,0.4), transparent 40%),
+    radial-gradient(circle at var(--x3, 50%) var(--y3, 50%), rgba(255,255,0,0.4), transparent 40%),
+    radial-gradient(circle at var(--x4, 50%) var(--y4, 50%), rgba(255,0,0,0.3), transparent 30%),
+    radial-gradient(circle at var(--x5, 50%) var(--y5, 50%), rgba(0,255,0,0.3), transparent 30%);
+  animation: partyLights 8s infinite linear;
+  mix-blend-mode: screen;
+  opacity: 0.8;
+}
+
+@keyframes partyLights {
+  0% { 
+    --x1: 0%; --y1: 0%; 
+    --x2: 100%; --y2: 100%; 
+    --x3: 50%; --y3: 50%;
+    --x4: 25%; --y4: 75%;
+    --x5: 75%; --y5: 25%;
+  }
+  20% { 
+    --x1: 100%; --y1: 0%; 
+    --x2: 0%; --y2: 100%; 
+    --x3: 0%; --y3: 0%;
+    --x4: 75%; --y4: 25%;
+    --x5: 25%; --y5: 75%;
+  }
+  40% { 
+    --x1: 0%; --y1: 100%; 
+    --x2: 100%; --y2: 0%; 
+    --x3: 100%; --y3: 100%;
+    --x4: 25%; --y4: 25%;
+    --x5: 75%; --y5: 75%;
+  }
+  60% { 
+    --x1: 100%; --y1: 100%; 
+    --x2: 0%; --y2: 0%; 
+    --x3: 50%; --y3: 0%;
+    --x4: 75%; --y4: 75%;
+    --x5: 25%; --y5: 25%;
+  }
+  80% { 
+    --x1: 0%; --y1: 0%; 
+    --x2: 100%; --y2: 100%; 
+    --x3: 0%; --y3: 50%;
+    --x4: 25%; --y4: 75%;
+    --x5: 75%; --y5: 25%;
+  }
+  100% { 
+    --x1: 0%; --y1: 0%; 
+    --x2: 100%; --y2: 100%; 
+    --x3: 50%; --y3: 50%;
+    --x4: 25%; --y4: 75%;
+    --x5: 75%; --y5: 25%;
+  }
+}
+
+/* Disco Ball and Light Beams */
+.disco-ball {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle at 30% 30%, #fff, #aaa);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(255,255,255,0.8);
+  animation: discoRotate 4s infinite linear;
+  z-index: 100;
+}
+
+.light-beam {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 2px;
+  height: 100vh;
+  background: linear-gradient(to bottom, 
+    rgba(255,255,255,0.8) 0%,
+    rgba(255,255,255,0) 100%);
+  transform-origin: top;
+  transform: rotate(var(--rotation));
+  animation: beamRotate 4s infinite linear;
+  z-index: 99;
+}
+
+@keyframes discoRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes beamRotate {
+  0% { transform: rotate(var(--rotation)) translateY(0); opacity: 0.8; }
+  50% { transform: rotate(calc(var(--rotation) + 180deg)) translateY(-50vh); opacity: 0.4; }
+  100% { transform: rotate(calc(var(--rotation) + 360deg)) translateY(0); opacity: 0.8; }
+}
+
+/* Add wave variants for a more coherent wave pattern */
+.note.wave1 {
+  animation-name: waveFloat1;
+}
+
+.note.wave2 {
+  animation-name: waveFloat2;
+}
+
+.note.wave3 {
+  animation-name: waveFloat3;
+}
+
+@keyframes waveFloat1 {
+  0% {
+    bottom: -50px;
+    opacity: 1;
+    transform: translateX(0) rotate(0deg) translateZ(0);
+  }
+  25% {
+    transform: translateX(60px) rotate(45deg) translateZ(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(30px) rotate(180deg) translateZ(0);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateX(-30px) rotate(270deg) translateZ(0);
+    opacity: 0.7;
+  }
+  90% {
+    bottom: 95vh;
+    opacity: 0.3;
+    transform: translateX(15px) rotate(345deg) translateZ(0);
+  }
+  100% {
+    bottom: 110vh;
+    opacity: 0;
+    transform: translateX(0) rotate(360deg) translateZ(0);
+  }
+}
+
+@keyframes waveFloat2 {
+  0% {
+    bottom: -50px;
+    opacity: 1;
+    transform: translateX(0) rotate(0deg) translateZ(0);
+  }
+  25% {
+    transform: translateX(-50px) rotate(-30deg) translateZ(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-25px) rotate(180deg) translateZ(0);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateX(50px) rotate(270deg) translateZ(0);
+    opacity: 0.7;
+  }
+  90% {
+    bottom: 95vh;
+    opacity: 0.3;
+    transform: translateX(-15px) rotate(345deg) translateZ(0);
+  }
+  100% {
+    bottom: 110vh;
+    opacity: 0;
+    transform: translateX(0) rotate(360deg) translateZ(0);
+  }
+}
+
+@keyframes waveFloat3 {
+  0% {
+    bottom: -50px;
+    opacity: 1;
+    transform: translateX(0) rotate(0deg) translateZ(0);
+  }
+  20% {
+    transform: translateX(30px) rotate(30deg) translateZ(0);
+    opacity: 1;
+  }
+  40% {
+    transform: translateX(-30px) rotate(120deg) translateZ(0);
+    opacity: 0.95;
+  }
+  60% {
+    transform: translateX(20px) rotate(210deg) translateZ(0);
+    opacity: 0.85;
+  }
+  80% {
+    transform: translateX(-20px) rotate(300deg) translateZ(0);
+    opacity: 0.6;
+    bottom: 80vh;
+  }
+  90% {
+    bottom: 95vh;
+    opacity: 0.3;
+    transform: translateX(0) rotate(345deg) translateZ(0);
+  }
+  100% {
+    bottom: 110vh;
+    opacity: 0;
+    transform: translateX(0) rotate(360deg) translateZ(0);
+  }
+}

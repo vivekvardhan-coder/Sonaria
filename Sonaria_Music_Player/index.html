@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="musical-note.png" type="image/png">
+  <title>Sonaria Music Player</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <h1 class="app-title">Sonaria</h1>
+    <div class="theme-container" id="theme-toggle">
+      <button data-theme="light">☀️ Light</button>
+      <button data-theme="dark">🌙 Dark</button>
+      <button data-theme="neon">⚡ Neon</button>
+      <button data-theme="party">🎉 Party</button>
+    </div>
+  </nav>
+
+  <div class="main-content">
+    <div class="music-container glass" id="music-container">
+      <h1 id="title">🎵 No Song Selected</h1>
+      
+      <div class="upload-section" id="upload-box">
+        <input type="file" id="file-upload" accept="audio/*" multiple hidden />
+        <label for="file-upload" class="upload-btn">📂 Choose Songs</label>
+        <p>or drag and drop your files here</p>
+      </div>
+
+      <ul id="playlist"></ul>
+
+      <div class="controls">
+        <button id="prev">⏮️</button>
+        <button id="play">▶️</button>
+        <button id="next">⏭️</button>
+      </div>
+
+      <audio id="audio"></audio>
+
+      <div id="visualizer">
+        <div class="bar" style="--i:0;"></div>
+        <div class="bar" style="--i:1;"></div>
+        <div class="bar" style="--i:2;"></div>
+        <div class="bar" style="--i:3;"></div>
+        <div class="bar" style="--i:4;"></div>
+        <div class="bar" style="--i:5;"></div>
+        <div class="bar" style="--i:6;"></div>
+        <div class="bar" style="--i:7;"></div>
+      </div>
+
+      <div class="lyrics-container">
+        <input type="file" id="lyrics-upload" accept=".txt" hidden />
+        <label for="lyrics-upload" class="lyrics-btn">📝 Upload Lyrics</label>
+        <pre id="lyrics-box">🎶 No lyrics loaded</pre>
+      </div>
+    </div>
+  </div>
+
+  <div id="floating-notes"></div>
+  <div id="party-lights"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
